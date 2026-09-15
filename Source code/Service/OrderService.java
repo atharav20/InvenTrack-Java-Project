@@ -19,3 +19,13 @@ import java.util.concurrent.locks.ReentrantLock;
 public class OrderService {
     private final ProductService productService = new ProductService();
     private final ReentrantLock lock = new ReentrantLock();
+    /**
+     * Processes a stock order (IN or OUT) for a given product.
+     * OUT orders are rejected with InsufficientStockException if there
+     * isn't enough quantity on hand. Thread-safe via the internal lock.
+     */
+    public void processOrder(int productId, int qty, String type) throws InventoryException {
+        if (qty <= 0) throw new InventoryException(ErrorType.INVALID_PRODUCT, "Quantity must be positive");
+        if (!type.equals("IN") && !type.equals("OUT"))
+            throw new InventoryException(ErrorType.INVALID_PRODUCT, "Type must be IN or OUT");
+
