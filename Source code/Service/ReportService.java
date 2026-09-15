@@ -19,3 +19,14 @@ public class ReportService {
         return productService.getAllProducts().stream()
                 .filter(Product::isLowStock).collect(Collectors.toList());
     }
+     /** Prints a formatted low-stock report to the console. */
+    public void printLowStockReport() throws InventoryException {
+        List<Product> low = getLowStockProducts();
+        System.out.println("=== Low Stock Report ===");
+        if (low.isEmpty()) {
+            System.out.println("All products above reorder level.");
+            return;
+        }
+        for (Product p : low)
+            System.out.printf("%-20s qty=%-5d reorder=%-5d%n", p.getName(), p.getQuantity(), p.getReorderLevel());
+    }
