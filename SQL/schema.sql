@@ -1,1 +1,8 @@
-
+CREATE TABLE IF NOT EXISTS Products (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    category TEXT NOT NULL,
+    quantity INTEGER NOT NULL DEFAULT 0,
+    price REAL NOT NULL,
+    reorder_level INTEGER NOT NULL DEFAULT 10
+);
