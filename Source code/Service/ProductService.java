@@ -33,3 +33,15 @@ public class ProductService {
             throw new InventoryException(ErrorType.DATABASE_ERROR, e.getMessage(), e);
         }
     }
+    /** Returns every product currently in the database. */
+    public List<Product> getAllProducts() throws InventoryException {
+        List<Product> list = new ArrayList<>();
+        String sql = "SELECT * FROM Products";
+        try (Connection c = DBConnection.getConnection(); PreparedStatement s = c.prepareStatement(sql);
+             ResultSet rs = s.executeQuery()) {
+            while (rs.next()) list.add(map(rs));
+        } catch (SQLException e) {
+            throw new InventoryException(ErrorType.DATABASE_ERROR, e.getMessage(), e);
+        }
+        return list;
+    }
