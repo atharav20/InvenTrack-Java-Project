@@ -28,4 +28,32 @@ public class OrderService {
         if (qty <= 0) throw new InventoryException(ErrorType.INVALID_PRODUCT, "Quantity must be positive");
         if (!type.equals("IN") && !type.equals("OUT"))
             throw new InventoryException(ErrorType.INVALID_PRODUCT, "Type must be IN or OUT");
+         lock.lock();
+        try {
+            Product p = productService.getProductById(productId);
+            if (type.equals("OUT") && p.getQuantity() < qty)
+                throw new InventoryException(ErrorType.INSUFFICIENT_STOCK,
+                        "Only " + p.getQuantity() + " in stock for " + p.getName());
+
+            p.setQuantity(type.equals("OUT") ? p.getQuantity() - qty : p.getQuantity() + qty);
+            productService.updateProduct(p);
+            recordOrder(productId, qty, type);
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    /** Inserts a row into the Orders table for audit/history purposes. */
+    private void recordOrder(int productId, int qty, String type) throws InventoryException {
+        String sql = "INSERT INTO Orders (product_id, quantity, order_type) VALUES (?,?,?)";
+        try (Connection c = DBConnection.getConnection(); PreparedStatement s = c.prepareStatement(sql)) {
+            s.setInt(1, productId);
+            s.setInt(2, qty);
+            s.setString(3, type);
+            s.executeUpdate();
+        } catch (SQLException e) {
+            throw new InventoryException(ErrorType.DATABASE_ERROR, e.getMessage(), e);
+        }
+    }
+}
 
