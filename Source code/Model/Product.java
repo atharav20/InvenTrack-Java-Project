@@ -54,4 +54,9 @@ public class Product {
     public boolean isLowStock() {
         return quantity <= reorderLevel;
     }
-
+    @Override
+    public String toString() {
+        return "Product{id=" + id + ", name='" + name + "', category='" + category +
+                "', quantity=" + quantity + ", price=" + price + ", reorderLevel=" + reorderLevel + "}";
+    }
+}
