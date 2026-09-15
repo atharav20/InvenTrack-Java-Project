@@ -15,4 +15,13 @@ public class Product {
 
     public Product() {
     }
+    /** Full constructor, used when loading an existing product from the database. */
+    public Product(int id, String name, String category, int quantity, double price, int reorderLevel) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.quantity = quantity;
+        this.price = price;
+        this.reorderLevel = reorderLevel;
+    }
 
