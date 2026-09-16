@@ -1,12 +1,15 @@
 package service;
+
 import model.Product;
-import util.DBConnection;
 import util.InventoryException;
 import util.InventoryException.ErrorType;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * Module 2: Stock Transaction Processing.
  * Records stock-in / stock-out orders and updates product quantity.
@@ -17,18 +20,17 @@ import java.util.concurrent.locks.ReentrantLock;
  * quantity from going negative under concurrent load.
  */
 public class OrderService {
+    private static final String ORDERS_FILE = "orders_db.csv";
+
     private final ProductService productService = new ProductService();
     private final ReentrantLock lock = new ReentrantLock();
-    /**
-     * Processes a stock order (IN or OUT) for a given product.
-     * OUT orders are rejected with InsufficientStockException if there
-     * isn't enough quantity on hand. Thread-safe via the internal lock.
-     */
+
     public void processOrder(int productId, int qty, String type) throws InventoryException {
         if (qty <= 0) throw new InventoryException(ErrorType.INVALID_PRODUCT, "Quantity must be positive");
         if (!type.equals("IN") && !type.equals("OUT"))
             throw new InventoryException(ErrorType.INVALID_PRODUCT, "Type must be IN or OUT");
-         lock.lock();
+
+        lock.lock();
         try {
             Product p = productService.getProductById(productId);
             if (type.equals("OUT") && p.getQuantity() < qty)
@@ -43,17 +45,19 @@ public class OrderService {
         }
     }
 
-    /** Inserts a row into the Orders table for audit/history purposes. */
+    /** Appends a line to orders_db.csv for audit/history purposes. */
     private void recordOrder(int productId, int qty, String type) throws InventoryException {
-        String sql = "INSERT INTO Orders (product_id, quantity, order_type) VALUES (?,?,?)";
-        try (Connection c = DBConnection.getConnection(); PreparedStatement s = c.prepareStatement(sql)) {
-            s.setInt(1, productId);
-            s.setInt(2, qty);
-            s.setString(3, type);
-            s.executeUpdate();
-        } catch (SQLException e) {
-            throw new InventoryException(ErrorType.DATABASE_ERROR, e.getMessage(), e);
+        File file = new File(ORDERS_FILE);
+        boolean needsHeader = !file.exists();
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(ORDERS_FILE, true))) {
+            if (needsHeader) {
+                bw.write("product_id,quantity,order_type,timestamp\n");
+            }
+            String record = String.format("%d,%d,%s,%d%n", productId, qty, type, System.currentTimeMillis());
+            bw.write(record);
+        } catch (IOException e) {
+            throw new InventoryException(ErrorType.DATABASE_ERROR, "Failed to record order: " + e.getMessage(), e);
         }
     }
 }
-
