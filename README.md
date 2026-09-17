@@ -2,15 +2,7 @@
 # InvenTrack – Inventory & Order Management System
 
 ## Overview
-InvenTrack project solves the problem statement Today also many small buisnesses manage
-stocks and inventory manually using notebooks or spreadsheet, which makes very difficult
-for them to keep track of products, stock IN and OUT , reorder the stock thats running low
-in inventory and this process is also very time consuming. It leads to problem like out of 
-stock and overstock. . It allows a user to manage a product catalog,
-process stock-in and stock-out orders, and generate low-stock reports — all through
-a simple terminal menu. The project applies core Java concepts covered in the
-course: object-oriented design, custom exception handling, multithreading with
-synchronization, the Collections framework, and file I/O.
+InvenTrack project solves the problem statement Today also many small buisnesses managestocks and inventory manually using notebooks or spreadsheet, which makes very difficultfor them to keep track of products, stock IN and OUT , reorder the stock thats running lowin inventory and this process is also very time consuming. It leads to problem like out of stock and overstock. It allows the buisness owner to manage a product catalog,process stock-in and stock-out orders, and generate low-stock reports — all througha simple terminal menu. The project is built using Java .
 
 ## Features
 - **Product Management** – add, list, update, and delete products
