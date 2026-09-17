@@ -30,6 +30,8 @@ public class Main {
                 else System.out.println("Invalid option.");
             } catch (InventoryException e) {
                 System.out.println("Error: " + e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println("Error: please enter a valid number.");
             }
         }
     }

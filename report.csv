@@ -1,0 +1,2 @@
+id,name,category,quantity,price,reorder_level,status
+1,Chips,Eatables,1,20.00,1,LOW
