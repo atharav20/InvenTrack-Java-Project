@@ -25,23 +25,24 @@ synchronization, the Collections framework, and file I/O.
 - No external dependencies
 
 ## Project Structure
+```
 InvenTrack/
 ├── src/
-│ ├── model/
-│ │ └── Product.java
-│ ├── service/
-│ │ ├── ProductService.java (Module 1: Product CRUD)
-│ │ ├── OrderService.java (Module 2: Stock in/out, thread-safe)
-│ │ └── ReportService.java (Module 3: Reporting)
-│ ├── util/
-│ │ └── InventoryException.java
-│ ├── test/
-│ │ └── InventoryServiceTest.java
-│ └── Main.java
+│   ├── model/
+│   │   └── Product.java
+│   ├── service/
+│   │   ├── ProductService.java     (Module 1: Product CRUD)
+│   │   ├── OrderService.java       (Module 2: Stock in/out, thread-safe)
+│   │   └── ReportService.java      (Module 3: Reporting)
+│   ├── util/
+│   │   └── InventoryException.java
+│   ├── test/
+│   │   └── InventoryServiceTest.java
+│   └── Main.java
 ├── README.md
 ├── statement.md
 └── config.properties
-
+```
 ## Setup & Installation
 No external libraries or database installation are required — this project
 uses only the Java standard library.
