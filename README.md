@@ -6,8 +6,8 @@ InvenTrack project solves the problem statement Today also many small buisnesses
 
 ## Features
 - **Product Management** – add, list, update, and delete products
-- **Stock Transaction Processing** – record stock-in/stock-out orders with
-  automatic quantity updates and thread-safe handling of concurrent orders
+- **Stock Transaction Processing** – records stock-in and stock-out orders and updates
+  quantity automaticaly and thread-safe handling of concurrent orders
 - **Reporting** – view a low-stock alert report in the console, and export the
   full inventory to a CSV file
 - Custom exception handling for invalid input, missing products, and
@@ -16,8 +16,7 @@ InvenTrack project solves the problem statement Today also many small buisnesses
   runs with zero external setup — no database server or driver required
 
 ## Technologies Used
-- Java 17+ (standard library only — `java.io`, `java.util`, `java.util.concurrent`)
-- No external dependencies
+- Java 17+ 
 
 ## Project Structure
 ```
