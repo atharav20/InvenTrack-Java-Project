@@ -1,9 +1,10 @@
 # Problem Statement
 
-Small businesses and shopkeepers often manage their stock manually using
-notebooks or spreadsheets, which makes it difficult to track quantities
-accurately, notice when items are running low, or keep a record of stock
-movements over time. This leads to stockouts, overstocking, and lost sales.
+Today also many small buisnesses manage stocks and inventory manually using 
+notebooks or spreadsheet, which makes very difficult for them to keep track of
+products, stock IN and OUT , reorder the stock thats running low in inventory and
+this process is also very time consuming. It leads to problem like out of stock
+and overstock.
 
 InvenTrack addresses this by providing a simple, terminal-based inventory
 management system that lets a user add and track products, record stock-in
