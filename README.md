@@ -2,8 +2,7 @@
 # InvenTrack – Inventory & Order Management System
 
 ## Overview
-InvenTrack is a command-line inventory management system built in Java for the
-CSE2006 Programming in Java course. It allows a user to manage a product catalog,
+InvenTrack project solves the problem statement . It allows a user to manage a product catalog,
 process stock-in and stock-out orders, and generate low-stock reports — all through
 a simple terminal menu. The project applies core Java concepts covered in the
 course: object-oriented design, custom exception handling, multithreading with
