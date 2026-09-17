@@ -55,20 +55,26 @@ uses only the Java standard library.
 
 ### Compile
 From the project root:
-javac -d bin $(find src -name "*.java")
-On Windows (PowerShell), compile each file explicitly or use:
-javac -d bin src*.java src\model*.java src\service*.java src\util*.java src\test*.java
+```
+javac -d bin -sourcepath src src/Main.java src/test/InventoryServiceTest.java
+```
+
+On Windows (PowerShell), you can also compile explicitly:
+```
+javac -d bin -sourcepath src src\Main.java src\test\InventoryServiceTest.java
+```
 
 ### Run the application
+```
 java -cp bin Main
+```
 
 ### Run the test suite
+```
 java -cp bin test.InventoryServiceTest
+```
 
-**Important:** run these commands from the project root directory, so the
-program can find `products_db.csv` and `orders_db.csv` at the expected
-relative paths. These files are created automatically on first use — no
-manual setup needed.
+**Important:** run these commands from the project root directory, so the program can find `products_db.csv` and `orders_db.csv` at the expected relative paths. These files are created automatically on first use — no manual setup needed.
 
 ## Using the CLI
 Once running, you'll see a menu:
